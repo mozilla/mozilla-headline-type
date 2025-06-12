@@ -4,14 +4,11 @@
 
 [![][Fontbakery]](https://mozilla.github.io/mozilla-headline-type.git/fontbakery/fontbakery-report.html)
 [![][Universal]](https://mozilla.github.io/mozilla-headline-type.git/fontbakery/fontbakery-report.html)
-[![][GF Profile]](https://mozilla.github.io/mozilla-headline-type.git/fontbakery/fontbakery-report.html)
-[![][Shaping]](https://mozilla.github.io/mozilla-headline-type.git/fontbakery/fontbakery-report.html)
 
-[Fontbakery]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmozilla%2Fmozilla-headline-type.git%2Fgh-pages%2Fbadges%2Foverall.json
-[GF Profile]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmozilla%2Fmozilla-headline-type.git%2Fgh-pages%2Fbadges%2FGoogleFonts.json
-[Outline Correctness]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmozilla%2Fmozilla-headline-type.git%2Fgh-pages%2Fbadges%2FOutlineCorrectnessChecks.json
-[Shaping]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmozilla%2Fmozilla-headline-type.git%2Fgh-pages%2Fbadges%2FShapingChecks.json
-[Universal]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmozilla%2Fmozilla-headline-type.git%2Fgh-pages%2Fbadges%2FUniversal.json
+
+
+[Fontbakery]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/mozilla/mozilla-headline-type/gh-pages/badges/overall.json
+[Universal]: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/mozilla/mozilla-headline-type/gh-pages/badges/UniversalProfileChecks.json
 
 A custom headline typeface for Mozilla.
 
