@@ -15,7 +15,6 @@
 
 A custom headline typeface for Mozilla.
 
-
 ## License
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1. A copy of this license is included in this repository and is also available with a FAQ at https://openfontlicense.org
