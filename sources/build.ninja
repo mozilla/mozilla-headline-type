@@ -1,0 +1,554 @@
+# buildVariable: Build a variable font from a source file
+rule buildVariable
+  command = $
+      /Users/markllobrera/git-workspace/mozilla-headline-type/venv/bin/python3.13 $
+      -m gftools.builder.jobrunner fontmake --output-path $out -o variable $
+      $fontmake_type $in $args $stamp
+  description = buildVariable
+
+# fix: Run gftools-fix
+rule fix
+  command = $
+      /Users/markllobrera/git-workspace/mozilla-headline-type/venv/bin/python3.13 $
+      -m gftools.builder.jobrunner gftools-fix-font -o $out $args $in $stamp
+  description = fix
+
+# buildStat: Build a STAT table from one or more source files
+rule buildSTAT-operation
+  command = gftools-gen-stat --out $tempdir $args -- $in && mv $finalfile $
+      $out $stamp
+rule buildSTAT-postprocess
+  command = gftools-gen-stat --inplace $args -- $in $stamp
+
+# compress: Compress to webfont
+rule compress
+  command = $
+      /Users/markllobrera/git-workspace/mozilla-headline-type/venv/bin/python3.13 $
+      -m gftools.builder.jobrunner fonttools ttLib.woff2 compress -o $out $
+      $in $stamp
+  description = compress
+
+# instantiateUfo: Create instance UFOs from a Glyphs or designspace file
+rule instantiateUfo
+  command = $
+      /Users/markllobrera/git-workspace/mozilla-headline-type/venv/bin/python3.13 $
+      -m gftools.builder.jobrunner fontmake -i "$instance_name" -o ufo $
+      $fontmake_type $in $args $stamp
+  description = instantiateUfo
+
+# buildTTF: Build a TTF from a source file
+rule buildTTF
+  command = $
+      /Users/markllobrera/git-workspace/mozilla-headline-type/venv/bin/python3.13 $
+      -m gftools.builder.jobrunner fontmake --output-path $out -o ttf $
+      $fontmake_type $in $args $stamp
+  description = buildTTF
+
+# autohint: Run gftools-autohint
+rule autohint
+  command = $
+      /Users/markllobrera/git-workspace/mozilla-headline-type/venv/bin/python3.13 $
+      -m gftools.builder.jobrunner gftools-autohint $args -o $out $in $stamp
+  description = autohint
+
+# copy: Copy a file
+rule copy
+  command = $
+      /Users/markllobrera/git-workspace/mozilla-headline-type/venv/bin/python3.13 $
+      -m gftools.builder.jobrunner cp $in $out $stamp
+  description = copy
+
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp5wlg7103
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp5wlg7103: $
+    buildVariable MozillaHeadline.glyphs
+  operation = buildVariable
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+# Generating instance_ufos/MozillaHeadline-CondensedExtraLight.ufo.json
+build instance_ufos/MozillaHeadline-CondensedExtraLight.ufo.json: $
+    instantiateUfo MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline Condensed ExtraLight
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Generating instance_ufos/MozillaHeadline-CondensedLight.ufo.json
+build instance_ufos/MozillaHeadline-CondensedLight.ufo.json: instantiateUfo $
+    MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline Condensed Light
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Generating instance_ufos/MozillaHeadline-CondensedRegular.ufo.json
+build instance_ufos/MozillaHeadline-CondensedRegular.ufo.json: $
+    instantiateUfo MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline Condensed Regular
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Generating instance_ufos/MozillaHeadline-CondensedSemiBold.ufo.json
+build instance_ufos/MozillaHeadline-CondensedSemiBold.ufo.json: $
+    instantiateUfo MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline Condensed SemiBold
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Generating instance_ufos/MozillaHeadline-CondensedBold.ufo.json
+build instance_ufos/MozillaHeadline-CondensedBold.ufo.json: instantiateUfo $
+    MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline Condensed Bold
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Generating instance_ufos/MozillaHeadline-ExtraLight.ufo.json
+build instance_ufos/MozillaHeadline-ExtraLight.ufo.json: instantiateUfo $
+    MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline ExtraLight
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Generating instance_ufos/MozillaHeadline-Light.ufo.json
+build instance_ufos/MozillaHeadline-Light.ufo.json: instantiateUfo $
+    MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline Light
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Generating instance_ufos/MozillaHeadline-Regular.ufo.json
+build instance_ufos/MozillaHeadline-Regular.ufo.json: instantiateUfo $
+    MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline Regular
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Generating instance_ufos/MozillaHeadline-SemiBold.ufo.json
+build instance_ufos/MozillaHeadline-SemiBold.ufo.json: instantiateUfo $
+    MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline SemiBold
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Generating instance_ufos/MozillaHeadline-Bold.ufo.json
+build instance_ufos/MozillaHeadline-Bold.ufo.json: instantiateUfo $
+    MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline Bold
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Generating instance_ufos/MozillaHeadline-ExpandedExtraLight.ufo.json
+build instance_ufos/MozillaHeadline-ExpandedExtraLight.ufo.json: $
+    instantiateUfo MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline Expanded ExtraLight
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Generating instance_ufos/MozillaHeadline-ExpandedLight.ufo.json
+build instance_ufos/MozillaHeadline-ExpandedLight.ufo.json: instantiateUfo $
+    MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline Expanded Light
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Generating instance_ufos/MozillaHeadline-ExpandedRegular.ufo.json
+build instance_ufos/MozillaHeadline-ExpandedRegular.ufo.json: $
+    instantiateUfo MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline Expanded Regular
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Generating instance_ufos/MozillaHeadline-ExpandedSemiBold.ufo.json
+build instance_ufos/MozillaHeadline-ExpandedSemiBold.ufo.json: $
+    instantiateUfo MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline Expanded SemiBold
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Generating instance_ufos/MozillaHeadline-ExpandedBold.ufo.json
+build instance_ufos/MozillaHeadline-ExpandedBold.ufo.json: instantiateUfo $
+    MozillaHeadline.glyphs
+  operation = instantiateUfo
+  instance_name = Mozilla Headline Expanded Bold
+  fontmake_type = -g
+  fontmake_args =  --verbose WARNING 
+  args =  --ufo-structure=json --instance-dir instance_ufos
+# Postprocessing  with BuildSTAT
+build $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpnmweojji.buildStatstamp: $
+    buildSTAT-postprocess ../fonts/variable/MozillaHeadline[wdth,wght].ttf $
+    | ../fonts/variable/MozillaHeadline[wdth,wght].ttf
+  stamp =  && touch $
+      /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpnmweojji.buildStatstamp
+  postprocess = buildStat
+  args = --src /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpfsjuqcwp
+# Generating ../fonts/webfonts/MozillaHeadline[wdth,wght].woff2
+build ../fonts/webfonts/MozillaHeadline[wdth,wght].woff2: compress $
+    ../fonts/variable/MozillaHeadline[wdth,wght].ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-CondensedExtraLight.woff2
+build ../fonts/webfonts/MozillaHeadline-CondensedExtraLight.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-CondensedExtraLight.ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-CondensedLight.woff2
+build ../fonts/webfonts/MozillaHeadline-CondensedLight.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-CondensedLight.ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-CondensedRegular.woff2
+build ../fonts/webfonts/MozillaHeadline-CondensedRegular.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-CondensedRegular.ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-CondensedSemiBold.woff2
+build ../fonts/webfonts/MozillaHeadline-CondensedSemiBold.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-CondensedSemiBold.ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-CondensedBold.woff2
+build ../fonts/webfonts/MozillaHeadline-CondensedBold.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-CondensedBold.ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-ExtraLight.woff2
+build ../fonts/webfonts/MozillaHeadline-ExtraLight.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-ExtraLight.ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-Light.woff2
+build ../fonts/webfonts/MozillaHeadline-Light.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-Light.ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-Regular.woff2
+build ../fonts/webfonts/MozillaHeadline-Regular.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-Regular.ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-SemiBold.woff2
+build ../fonts/webfonts/MozillaHeadline-SemiBold.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-SemiBold.ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-Bold.woff2
+build ../fonts/webfonts/MozillaHeadline-Bold.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-Bold.ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-ExpandedExtraLight.woff2
+build ../fonts/webfonts/MozillaHeadline-ExpandedExtraLight.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-ExpandedExtraLight.ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-ExpandedLight.woff2
+build ../fonts/webfonts/MozillaHeadline-ExpandedLight.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-ExpandedLight.ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-ExpandedRegular.woff2
+build ../fonts/webfonts/MozillaHeadline-ExpandedRegular.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-ExpandedRegular.ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-ExpandedSemiBold.woff2
+build ../fonts/webfonts/MozillaHeadline-ExpandedSemiBold.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-ExpandedSemiBold.ttf
+  operation = compress
+# Generating ../fonts/webfonts/MozillaHeadline-ExpandedBold.woff2
+build ../fonts/webfonts/MozillaHeadline-ExpandedBold.woff2: compress $
+    ../fonts/ttf/MozillaHeadline-ExpandedBold.ttf
+  operation = compress
+# Generating ../fonts/variable/MozillaHeadline[wdth,wght].ttf
+build ../fonts/variable/MozillaHeadline[wdth,wght].ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp5wlg7103
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpzsjbyvkj
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpzsjbyvkj: $
+    buildTTF instance_ufos/MozillaHeadline-CondensedExtraLight.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpi61ayg48
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpi61ayg48: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpzsjbyvkj
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-CondensedExtraLight.ttf
+build ../fonts/ttf/MozillaHeadline-CondensedExtraLight.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpi61ayg48
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp0lktxxu3
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp0lktxxu3: $
+    buildTTF instance_ufos/MozillaHeadline-CondensedLight.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpqbif2a3q
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpqbif2a3q: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp0lktxxu3
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-CondensedLight.ttf
+build ../fonts/ttf/MozillaHeadline-CondensedLight.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpqbif2a3q
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpis7jevw0
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpis7jevw0: $
+    buildTTF instance_ufos/MozillaHeadline-CondensedRegular.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpafdkwjt4
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpafdkwjt4: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpis7jevw0
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-CondensedRegular.ttf
+build ../fonts/ttf/MozillaHeadline-CondensedRegular.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpafdkwjt4
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpbgiq1irg
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpbgiq1irg: $
+    buildTTF instance_ufos/MozillaHeadline-CondensedSemiBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpxe5hek83
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpxe5hek83: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpbgiq1irg
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-CondensedSemiBold.ttf
+build ../fonts/ttf/MozillaHeadline-CondensedSemiBold.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpxe5hek83
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp4t4l6jb1
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp4t4l6jb1: $
+    buildTTF instance_ufos/MozillaHeadline-CondensedBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp9kxgro4u
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp9kxgro4u: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp4t4l6jb1
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-CondensedBold.ttf
+build ../fonts/ttf/MozillaHeadline-CondensedBold.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp9kxgro4u
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp0u0hj4ib
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp0u0hj4ib: $
+    buildTTF instance_ufos/MozillaHeadline-ExtraLight.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpaea7l9kg
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpaea7l9kg: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp0u0hj4ib
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-ExtraLight.ttf
+build ../fonts/ttf/MozillaHeadline-ExtraLight.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpaea7l9kg
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp4ejhlfed
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp4ejhlfed: $
+    buildTTF instance_ufos/MozillaHeadline-Light.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpttorfefg
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpttorfefg: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp4ejhlfed
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-Light.ttf
+build ../fonts/ttf/MozillaHeadline-Light.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpttorfefg
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp4c80ir0n
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp4c80ir0n: $
+    buildTTF instance_ufos/MozillaHeadline-Regular.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp7f5kzzc4
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp7f5kzzc4: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp4c80ir0n
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-Regular.ttf
+build ../fonts/ttf/MozillaHeadline-Regular.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp7f5kzzc4
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp5x0vunbt
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp5x0vunbt: $
+    buildTTF instance_ufos/MozillaHeadline-SemiBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpj74d7q1d
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpj74d7q1d: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp5x0vunbt
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-SemiBold.ttf
+build ../fonts/ttf/MozillaHeadline-SemiBold.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpj74d7q1d
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmphy_6gtx9
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmphy_6gtx9: $
+    buildTTF instance_ufos/MozillaHeadline-Bold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpuowc70tl
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpuowc70tl: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmphy_6gtx9
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-Bold.ttf
+build ../fonts/ttf/MozillaHeadline-Bold.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpuowc70tl
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpep7p0stz
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpep7p0stz: $
+    buildTTF instance_ufos/MozillaHeadline-ExpandedExtraLight.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpl3i6hp_6
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpl3i6hp_6: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpep7p0stz
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-ExpandedExtraLight.ttf
+build ../fonts/ttf/MozillaHeadline-ExpandedExtraLight.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpl3i6hp_6
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp12evmf81
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp12evmf81: $
+    buildTTF instance_ufos/MozillaHeadline-ExpandedLight.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpdqotvd5q
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpdqotvd5q: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp12evmf81
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-ExpandedLight.ttf
+build ../fonts/ttf/MozillaHeadline-ExpandedLight.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpdqotvd5q
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpla8gkzax
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpla8gkzax: $
+    buildTTF instance_ufos/MozillaHeadline-ExpandedRegular.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp5ojd_vay
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp5ojd_vay: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpla8gkzax
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-ExpandedRegular.ttf
+build ../fonts/ttf/MozillaHeadline-ExpandedRegular.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmp5ojd_vay
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpwz26tcs4
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpwz26tcs4: $
+    buildTTF instance_ufos/MozillaHeadline-ExpandedSemiBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpv7iw2mj9
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpv7iw2mj9: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpwz26tcs4
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-ExpandedSemiBold.ttf
+build ../fonts/ttf/MozillaHeadline-ExpandedSemiBold.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpv7iw2mj9
+  operation = fix
+  args =  --include-source-fixes
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpn3sa9t07
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpn3sa9t07: $
+    buildTTF instance_ufos/MozillaHeadline-ExpandedBold.ufo.json
+  operation = buildTTF
+  args = --filter ...  --filter FlattenComponentsFilter --filter $
+      DecomposeTransformedComponentsFilter
+  fontmake_type = -u
+  fontmake_args =  --verbose WARNING 
+# Generating /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpm5l1gcpx
+build /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpm5l1gcpx: $
+    autohint /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpn3sa9t07
+  operation = autohint
+  args = --fail-ok 
+# Generating ../fonts/ttf/MozillaHeadline-ExpandedBold.ttf
+build ../fonts/ttf/MozillaHeadline-ExpandedBold.ttf: fix $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpm5l1gcpx
+  operation = fix
+  args =  --include-source-fixes
+default $
+    /var/folders/80/34jkccq95jddpfflkp0x51cc0000gn/T/tmpnmweojji.buildStatstamp $
+    ../fonts/webfonts/MozillaHeadline[wdth,wght].woff2 $
+    ../fonts/webfonts/MozillaHeadline-CondensedExtraLight.woff2 $
+    ../fonts/webfonts/MozillaHeadline-CondensedLight.woff2 $
+    ../fonts/webfonts/MozillaHeadline-CondensedRegular.woff2 $
+    ../fonts/webfonts/MozillaHeadline-CondensedSemiBold.woff2 $
+    ../fonts/webfonts/MozillaHeadline-CondensedBold.woff2 $
+    ../fonts/webfonts/MozillaHeadline-ExtraLight.woff2 $
+    ../fonts/webfonts/MozillaHeadline-Light.woff2 $
+    ../fonts/webfonts/MozillaHeadline-Regular.woff2 $
+    ../fonts/webfonts/MozillaHeadline-SemiBold.woff2 $
+    ../fonts/webfonts/MozillaHeadline-Bold.woff2 $
+    ../fonts/webfonts/MozillaHeadline-ExpandedExtraLight.woff2 $
+    ../fonts/webfonts/MozillaHeadline-ExpandedLight.woff2 $
+    ../fonts/webfonts/MozillaHeadline-ExpandedRegular.woff2 $
+    ../fonts/webfonts/MozillaHeadline-ExpandedSemiBold.woff2 $
+    ../fonts/webfonts/MozillaHeadline-ExpandedBold.woff2
