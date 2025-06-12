@@ -13,7 +13,7 @@
 [Shaping]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmozilla%2Fmozilla-headline-type.git%2Fgh-pages%2Fbadges%2FShapingChecks.json
 [Universal]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmozilla%2Fmozilla-headline-type.git%2Fgh-pages%2Fbadges%2FUniversal.json
 
-A custom typeface for Mozilla.
+A custom headline typeface for Mozilla.
 
 
 ## License
