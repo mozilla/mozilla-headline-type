@@ -23,16 +23,19 @@ jobs:
       id: python
       with:
         python-version: "3.11"
-    - name: Setup fontspector
-      uses: fonttools/setup-fontspector@main
+    - name: Download fontspector
+    # uses: fonttools/setup-fontspector@main  # 3rdparty action not allowed; downloading manually:
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        FONTSPECTOR: 1.5.2
+      run: |
+        curl -sSL "https://github.com/fonttools/fontspector/releases/download/fontspector-v$FONTSPECTOR/fontspector-v$FONTSPECTOR-x86_64-unknown-linux-gnu.tar.gz" | tar -xz --strip-components=1 --directory ~/.cargo/bin/
+        fontspector --list-checks
     - name: Install toolset
       run: |
         sudo apt-get update
         sudo apt-get install ttfautohint libcairo2-dev python3-cairo-dev pkg-config python3-dev
         sudo snap install yq
-    - uses: actions/cache@v4
+    - uses: actions/cache@v5
       with:
         path: ./venv/
         key: ${{ runner.os }}-venv${{ steps.python.outputs.python-version }}-${{ hashFiles('**/requirements*.txt') }}
@@ -72,7 +75,7 @@ jobs:
       with:
         path: ./out
     - name: Archive artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: ${{ env.ZIP_NAME }}
         path: |
@@ -116,7 +119,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Use font artifacts from CI
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v7
         with:
           name: ${{ env.ZIP_NAME }}
           path: ${{ env.ZIP_NAME }}
