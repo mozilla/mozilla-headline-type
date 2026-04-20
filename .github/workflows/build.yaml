@@ -98,7 +98,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
   # There are two ways a release can be created: either by pushing a tag, or by
   # creating a release from the GitHub UI. Pushing a tag does not automatically
