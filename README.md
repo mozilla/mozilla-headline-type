@@ -11,7 +11,6 @@
 [OpenType]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmozilla.github.io%2Fmozilla-headline-type%2Fbadges%2FOpentypeSpecificationChecks.json
 [Universal]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmozilla.github.io%2Fmozilla-headline-type%2Fbadges%2FUniversalProfileChecks.json
 [Google Fonts]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmozilla.github.io%2Fmozilla-headline-type%2Fbadges%2FFontFileChecks.json
-[Outline Correctness]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmozilla.github.io%2Fmozilla-headline-type%2Fbadges%2FOutlineCorrectnessChecks.json
 [Glyphset]: https://img.shields.io/endpoint?url=https%3A%2F%2Fmozilla.github.io%2Fmozilla-headline-type%2Fbadges%2FGlyphsetChecks.json
 [Proofs]: https://img.shields.io/badge/Diffenator-proofs-teal
 
